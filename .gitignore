@@ -1,0 +1,18 @@
+# Environnement virtuel
+fraud_env/
+venv/
+env/
+Lib/
+
+# Donnees volumineuses
+*.csv
+*.pkl
+*.h5
+data/
+datasets/
+
+# Fichiers systeme Python
+__pycache__/
+*.pyc
+*.pyd
+*.dll

@@ -1,0 +1,4 @@
+﻿{
+    "python.defaultInterpreterPath": "./fraud_env/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true
+}
