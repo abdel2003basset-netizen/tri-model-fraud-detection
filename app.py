@@ -41,7 +41,7 @@ data = load_data()
 
 # Sidebar pour les informations sur les données
 with st.sidebar:
-    st.header("📊 Informations sur les données")
+    st.header("Informations sur les données")
     st.write(f"**Nombre total de transactions:** {len(data):,}")
     st.write(f"**Transactions normales:** {(data['Class'] == 0).sum():,}")
     st.write(f"**Transactions frauduleuses:** {(data['Class'] == 1).sum():,}")
@@ -49,7 +49,7 @@ with st.sidebar:
     
     st.divider()
     
-    st.header("🤖 Algorithmes disponibles")
+    st.header("Algorithmes disponibles")
     st.write("**SVM** - Support Vector Machine")
     st.write("**ANN** - Artificial Neural Network")
     st.write("**XGBoost** - Extreme Gradient Boosting")
@@ -63,13 +63,13 @@ with col1:
         st.dataframe(data.head(100), use_container_width=True)
 
 with col2:
-    st.write("### 🚀 Lancer l'analyse")
+    st.write("### Lancer l'analyse")
     
     # Boutons pour les différents algorithmes
     col_svm, col_ann, col_xgb = st.columns(3)
     
     with col_svm:
-        if st.button("🔵 SVM", type="primary", use_container_width=True):
+        if st.button("SVM", type="primary", use_container_width=True):
             with st.spinner('Entraînement SVM...'):
                 try:
                     results = get_svm_results(data)
@@ -80,39 +80,39 @@ with col2:
                         if key in st.session_state:
                             del st.session_state[key]
                 except Exception as e:
-                    st.error(f"❌ Erreur SVM : {str(e)}")
+                    st.error(f"Erreur SVM : {str(e)}")
     
     with col_ann:
-        if st.button("🟢 ANN", type="secondary", use_container_width=True):
+        if st.button("ANN", type="secondary", use_container_width=True):
             with st.spinner('Entraînement ANN...'):
                 try:
                     results = get_ann_results(data)
-                    st.success("✅ ANN terminé!")
+                    st.success("ANN terminé!")
                     st.session_state.ann_results = results
                     # Nettoyer les autres résultats
                     for key in ['svm_results', 'xgboost_results', 'comparison_mode']:
                         if key in st.session_state:
                             del st.session_state[key]
                 except Exception as e:
-                    st.error(f"❌ Erreur ANN : {str(e)}")
+                    st.error(f"Erreur ANN : {str(e)}")
     
     with col_xgb:
-        if st.button("🟡 XGBoost", type="secondary", use_container_width=True):
+        if st.button("XGBoost", type="secondary", use_container_width=True):
             with st.spinner('Entraînement XGBoost...'):
                 try:
                     results = get_xgboost_results(data)
-                    st.success("✅ XGBoost terminé!")
+                    st.success(" XGBoost terminé!")
                     st.session_state.xgboost_results = results
                     # Nettoyer les autres résultats
                     for key in ['svm_results', 'ann_results', 'comparison_mode']:
                         if key in st.session_state:
                             del st.session_state[key]
                 except Exception as e:
-                    st.error(f"❌ Erreur XGBoost : {str(e)}")
+                    st.error(f"Erreur XGBoost : {str(e)}")
     
     # Bouton pour comparer tous les modèles
     st.divider()
-    if st.button("⚖️ Comparer tous les modèles", use_container_width=True):
+    if st.button("Comparer tous les modèles", use_container_width=True):
         with st.spinner('Entraînement de tous les modèles...'):
             try:
                 svm_results = get_svm_results(data)
@@ -125,19 +125,19 @@ with col2:
                 st.session_state.xgboost_results = xgboost_results
                 st.session_state.comparison_mode = True
                 
-                st.success("✅ Comparaison terminée!")
+                st.success("Comparaison terminée!")
                 
             except Exception as e:
-                st.error(f"❌ Erreur lors de la comparaison : {str(e)}")
+                st.error(f"Erreur lors de la comparaison : {str(e)}")
 
 # Affichage des résultats SVM
 if 'svm_results' in st.session_state and 'comparison_mode' not in st.session_state:
     results = st.session_state.svm_results
     
-    st.write("## 🔵 Résultats de l'analyse SVM")
+    st.write("## Résultats de l'analyse SVM")
     
     # Métriques principales
-    st.write("### 📈 Performances du modèle")
+    st.write("###  Performances du modèle")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Exactitude", f"{results['metrics']['accuracy']:.3f}")
@@ -149,7 +149,7 @@ if 'svm_results' in st.session_state and 'comparison_mode' not in st.session_sta
         st.metric("F1-Score", f"{results['metrics']['f1']:.3f}")
     
     # Graphiques SVM
-    st.write("### 📊 Visualisations")
+    st.write("###  Visualisations")
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -171,10 +171,10 @@ if 'svm_results' in st.session_state and 'comparison_mode' not in st.session_sta
 if 'ann_results' in st.session_state and 'comparison_mode' not in st.session_state:
     results = st.session_state.ann_results
     
-    st.write("## 🟢 Résultats de l'analyse ANN (Réseau de Neurones)")
+    st.write("##  Résultats de l'analyse ANN (Réseau de Neurones)")
     
     # Métriques principales
-    st.write("### 📈 Performances du modèle")
+    st.write("###  Performances du modèle")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Exactitude", f"{results['metrics']['accuracy']:.3f}")
@@ -188,21 +188,21 @@ if 'ann_results' in st.session_state and 'comparison_mode' not in st.session_sta
     # Informations sur le modèle et les données
     col1, col2 = st.columns(2)
     with col1:
-        st.write("### 🧠 Architecture du modèle")
+        st.write("###  Architecture du modèle")
         st.write(f"**Couches cachées:** {results['model_info']['hidden_layers']}")
         st.write(f"**Fonction d'activation:** {results['model_info']['activation']}")
         st.write(f"**Époques d'entraînement:** {results['model_info']['epochs_trained']}")
         st.write(f"**Taille de batch:** {results['model_info']['batch_size']}")
     
     with col2:
-        st.write("### 📋 Informations d'entraînement")
+        st.write("###  Informations d'entraînement")
         st.write(f"**Échantillons totaux:** {results['data_info']['total_samples']:,}")
         st.write(f"**Échantillons d'entraînement:** {results['data_info']['train_samples']:,}")
         st.write(f"**Échantillons de validation:** {results['data_info']['val_samples']:,}")
         st.write(f"**Échantillons de test:** {results['data_info']['test_samples']:,}")
 
     # Métriques avancées
-    st.write("### 🎯 Métriques avancées")
+    st.write("### Métriques avancées")
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("AUC-ROC", f"{results['metrics']['roc_auc']:.4f}")
@@ -212,7 +212,7 @@ if 'ann_results' in st.session_state and 'comparison_mode' not in st.session_sta
         st.write(f"**Taux de fraude:** {results['data_info']['fraud_rate']*100:.2f}%")
     
     # Graphiques ANN
-    st.write("### 📊 Visualisations")
+    st.write("###  Visualisations")
     
     col1, col2 = st.columns(2)
     
@@ -242,10 +242,10 @@ if 'ann_results' in st.session_state and 'comparison_mode' not in st.session_sta
 if 'xgboost_results' in st.session_state and 'comparison_mode' not in st.session_state:
     results = st.session_state.xgboost_results
     
-    st.write("## 🟡 Résultats de l'analyse XGBoost")
+    st.write("##  Résultats de l'analyse XGBoost")
     
     # Métriques principales
-    st.write("### 📈 Performances du modèle")
+    st.write("###  Performances du modèle")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.metric("Exactitude", f"{results['metrics']['accuracy']:.3f}")
@@ -259,20 +259,20 @@ if 'xgboost_results' in st.session_state and 'comparison_mode' not in st.session
     # Informations sur les données utilisées
     col1, col2 = st.columns(2)
     with col1:
-        st.write("### 📋 Informations d'entraînement")
+        st.write("###  Informations d'entraînement")
         st.write(f"**Échantillons totaux:** {results['data_info']['total_samples']:,}")
         st.write(f"**Échantillons d'entraînement:** {results['data_info']['train_samples']:,}")
         st.write(f"**Échantillons de validation:** {results['data_info']['val_samples']:,}")
         st.write(f"**Échantillons de test:** {results['data_info']['test_samples']:,}")
     
     with col2:
-        st.write("### 🎯 Métriques avancées")
+        st.write("###  Métriques avancées")
         st.metric("AUC-ROC", f"{results['metrics']['roc_auc']:.4f}")
         st.metric("AUC-PR", f"{results['metrics']['pr_auc']:.4f}")
         st.write(f"**Taux de fraude:** {results['data_info']['fraud_rate']*100:.2f}%")
     
     # Graphiques XGBoost
-    st.write("### 📊 Visualisations")
+    st.write("### Visualisations")
     
     col1, col2 = st.columns(2)
     
@@ -299,19 +299,19 @@ if 'xgboost_results' in st.session_state and 'comparison_mode' not in st.session
         st.pyplot(fig4)
     
     # Rapport de classification détaillé
-    st.write("### 📄 Rapport de classification détaillé")
+    st.write("###  Rapport de classification détaillé")
     st.text(results['classification_report'])
 
 # Mode comparaison
 if 'comparison_mode' in st.session_state:
-    st.write("## ⚖️ Comparaison des modèles")
+    st.write("##  Comparaison des modèles")
     
     svm_results = st.session_state.svm_results
     ann_results = st.session_state.ann_results
     xgboost_results = st.session_state.xgboost_results
     
     # Tableau de comparaison des métriques
-    st.write("### 📊 Comparaison des performances")
+    st.write("###  Comparaison des performances")
     
     comparison_df = pd.DataFrame({
         'Métrique': ['Exactitude', 'Précision', 'Rappel', 'F1-Score', 'AUC-ROC', 'AUC-PR'],
@@ -351,7 +351,7 @@ if 'comparison_mode' in st.session_state:
     st.dataframe(comparison_df, use_container_width=True)
     
     # Graphiques comparatifs
-    st.write("### 📈 Courbes ROC comparatives")
+    st.write("###  Courbes ROC comparatives")
     
     col1, col2, col3 = st.columns(3)
     
@@ -371,7 +371,7 @@ if 'comparison_mode' in st.session_state:
         st.pyplot(fig3)
     
     # Recommandation basée sur les résultats
-    st.write("### 🎯 Recommandation")
+    st.write("###  Recommandation")
     
     # Calculer le score moyen pour chaque modèle
     svm_avg = sum([svm_results['metrics'][m] for m in ['accuracy', 'precision', 'recall', 'f1', 'roc_auc']]) / 5
@@ -380,9 +380,9 @@ if 'comparison_mode' in st.session_state:
     
     best_model = max([('SVM', svm_avg), ('ANN', ann_avg), ('XGBoost', xgb_avg)], key=lambda x: x[1])
     
-    st.success(f"🏆 **Modèle recommandé : {best_model[0]}** avec un score moyen de {best_model[1]:.4f}")
+    st.success(f" **Modèle recommandé : {best_model[0]}** avec un score moyen de {best_model[1]:.4f}")
     
-    if st.button("🗑️ Effacer la comparaison"):
+    if st.button(" Effacer la comparaison"):
         for key in ['svm_results', 'ann_results', 'xgboost_results', 'comparison_mode']:
             if key in st.session_state:
                 del st.session_state[key]
@@ -390,7 +390,7 @@ if 'comparison_mode' in st.session_state:
 
 # Bouton de nettoyage général
 if any(key in st.session_state for key in ['svm_results', 'ann_results', 'xgboost_results']):
-    if st.button("🗑️ Effacer tous les résultats"):
+    if st.button(" Effacer tous les résultats"):
         for key in ['svm_results', 'ann_results', 'xgboost_results', 'comparison_mode']:
             if key in st.session_state:
                 del st.session_state[key]
