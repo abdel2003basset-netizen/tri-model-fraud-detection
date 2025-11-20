@@ -39,7 +39,7 @@ def get_xgboost_results(data):
 # Interface principale
 data = load_data()
 
-# Sidebar pour les informations sur les données
+# Sidebar pour les informations sur les données sensibles
 with st.sidebar:
     st.header("Informations sur les données")
     st.write(f"**Nombre total de transactions:** {len(data):,}")
