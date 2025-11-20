@@ -12,7 +12,7 @@ from XGBoost import (train_xgboost_model, create_xgboost_confusion_matrix_plot,
 
 # Configuration Streamlit
 st.set_page_config(page_title="Détection de Fraude", layout="wide")
-st.title("🔍 Détection de Fraude Bancaire")
+st.title(" Détection de Fraude Bancaire")
 st.write("""
 ### Analyse des transactions avec Machine Learning
 Cette application détecte les opérations suspectes en utilisant différents algorithmes.
